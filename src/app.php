@@ -8,12 +8,32 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = new Application();
 
-$app->get('/', function() {
-    ob_start();
-    include __DIR__ . '/../templates/home.phtml';
-    $response = ob_get_clean();
+/** Containers **/
 
-    return new Response($response);
+$app['value1'] = 'Test';
+
+$app['getDateTime'] = function() {
+    $now = new \DateTime();
+    return $now->format('Y-m-d H:i:s');
+};
+
+$app['view.config'] = [
+    'path_templates' =>  __DIR__ . '/../templates',
+];
+
+$app['view.renderer'] = function() use ($app) {
+    $pathTemplates = $app['view.config']['path_templates'];
+    return new \App\View\ViewRenderer($pathTemplates);
+};
+
+/** ROUTES **/
+
+$app->get('/', function() use ($app) {
+    return $app['view.renderer']->render('home');
+});
+
+$app->get('/test', function(Application $app) {
+    return new Response($app['getDateTime']);
 });
 
 $app->post('/home', function(Request $request) {
@@ -36,5 +56,7 @@ $app->post('/home/{param}', function(Request $request, $param) {
     
     return new Response($param);
 });
+
+/** Run application */
 
 $app->run();
