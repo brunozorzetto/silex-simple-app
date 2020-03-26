@@ -1,4 +1,4 @@
-# A simple Silex application.
+# A simple Silex example.
 
 Use commands: 
 - composer install
