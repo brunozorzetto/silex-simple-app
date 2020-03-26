@@ -1,3 +1,5 @@
 # A simple Silex application.
 
-- Use command: composer install
+Use commands: 
+- composer install
+- npm install

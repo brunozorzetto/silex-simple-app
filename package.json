@@ -1,0 +1,24 @@
+{
+  "name": "silex-example",
+  "version": "1.0.0",
+  "description": "- Use command: composer install",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunozorzetto/silex-example.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brunozorzetto/silex-example/issues"
+  },
+  "homepage": "https://github.com/brunozorzetto/silex-example#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2"
+  }
+}

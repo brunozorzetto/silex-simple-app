@@ -36,25 +36,29 @@ $app->get('/test', function(Application $app) {
     return new Response($app['getDateTime']);
 });
 
-$app->post('/home', function(Request $request) {
-    
-    $paramName = $request->get('name');
+$app->post('/get-name', function(Request $request) use ($app) {
+
+    $name = $request->get('name', 'no name');
+
+    return $app['view.renderer']->render('get-name', [
+        'name' => $name,
+    ]);
+});
+
+$app->get('/home', function(Request $request) use ($app) {
 
     $getParams = $request->query->all();
     $postParams = $request->request->all();
-    
-    return new Response($paramName);
+
+    return $app['view.renderer']->render('home');
 });
 
 /** Route with param */
-$app->post('/home/{param}', function(Request $request, $param) {
-    
-    $paramName = $request->get('name');
+$app->post('/home/{param}', function(Request $request, $param) use ($app) {
 
-    $getParams = $request->query->all();
-    $postParams = $request->request->all();
-    
-    return new Response($param);
+    return $app['view.renderer']->render('home', [
+        'param' => $param
+    ]);
 });
 
 /** Run application */
